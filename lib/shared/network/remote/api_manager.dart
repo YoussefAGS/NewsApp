@@ -9,33 +9,31 @@ import 'package:news/shared/componats/componants.dart';
 import 'package:news/shared/constant/constant.dart';
 
 class ApiManager {
-  static Future<SourcesResponse>getSources()async {
+  static Future<SourcesResponse> getSources(String category) async {
     //GET https://newsapi.org/v2/top-headlines/sources?apiKey=API_KEY
-    var URL =Uri.https(BASE,'/v2/top-headlines/sources',{
-      "apiKey":ApiKey});
+    var URL = Uri.https(BASE, '/v2/top-headlines/sources',
+        {"apiKey": ApiKey, "category": category});
 
-    try{
-    Response sources=await http.get(URL);
-    var json=jsonDecode(sources.body);
-    SourcesResponse sourcesResponse=SourcesResponse.fromJson(json);
-    return sourcesResponse;
-
-    }catch(e){
-      throw  e;
-
+    try {
+      Response sources = await http.get(URL);
+      var json = jsonDecode(sources.body);
+      SourcesResponse sourcesResponse = SourcesResponse.fromJson(json);
+      return sourcesResponse;
+    } catch (e) {
+      throw e;
     }
-
-
-
-
   }
-  static Future<NewsDataModel> getData(String sourceId)async{
-    var URL =Uri.https(BASE,'/v2/everything',{
-      "apiKey":ApiKey,
-    "sources":sourceId});
-    Response response= await http.get(URL);
-    var json=jsonDecode(response.body);
-    NewsDataModel newsDataModel=NewsDataModel.fromJson(json);
-return newsDataModel;
+
+  static Future<NewsDataModel> getData({String? sourceId,String? query}) async {
+    var URL = Uri.https(
+        BASE, '/v2/everything',
+        {"apiKey": ApiKey,
+          "sources": sourceId,
+          "q":query}
+    );
+    Response response = await http.get(URL);
+    var json = jsonDecode(response.body);
+    NewsDataModel newsDataModel = NewsDataModel.fromJson(json);
+    return newsDataModel;
   }
 }

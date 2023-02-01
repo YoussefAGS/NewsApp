@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news/layout/details-screen.dart';
 import 'package:news/layout/home_layout.dart';
 import 'package:news/shared/stayls/my_themedata.dart';
 
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
       initialRoute: HomeLayout.routName,
       routes: {
         HomeLayout.routName: (context) => HomeLayout(),
+        ArticleDetailsScreen.routename:(context)=>ArticleDetailsScreen(),
       },
       debugShowCheckedModeBanner: false,
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:news/models/NewsDataModel.dart';
 import 'package:news/models/SourcesResponse.dart';
-import 'package:news/models/news-card.dart';
-import 'package:news/models/tab-Item.dart';
+import 'package:news/moudlse/news-card.dart';
+import 'package:news/moudlse/cotroller/tab-Item.dart';
 
-import '../shared/network/remote/api_manager.dart';
+import '../../shared/network/remote/api_manager.dart';
 
 class TabControllerScreen extends StatefulWidget {
   List<Sources> sources = [];
@@ -39,7 +39,7 @@ class _TabControllerScreenState extends State<TabControllerScreen> {
                   .toList(),
             )),
         FutureBuilder<NewsDataModel>(
-          future: ApiManager.getData(widget.sources[selected].id ?? ""),
+          future: ApiManager.getData(sourceId:widget.sources[selected].id ?? ""),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
