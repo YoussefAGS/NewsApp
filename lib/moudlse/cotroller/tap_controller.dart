@@ -20,6 +20,9 @@ class _TabControllerScreenState extends State<TabControllerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+
     return Column(
       children: [
         DefaultTabController(
@@ -33,8 +36,7 @@ class _TabControllerScreenState extends State<TabControllerScreen> {
               indicatorColor: Colors.transparent,
               tabs: widget.sources
                   .map((source) => Tab(
-                        child: TabItem(
-                            source, widget.sources.indexOf(source) == selected),
+                        child: TabItem(source, widget.sources.indexOf(source) == selected),
                       ))
                   .toList(),
             )),
@@ -65,7 +67,13 @@ class _TabControllerScreenState extends State<TabControllerScreen> {
             }
             var news = snapshot.data?.articles ?? [];
             return Expanded(
-              child: ListView.builder(
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: (width>1200) ? 3:((width>600)?2:1),
+                  mainAxisSpacing: 12,
+                  crossAxisSpacing: 12,
+                  childAspectRatio: (width>1200) ?1.3: ((width>600)?1:1.2),
+                ),
                 itemBuilder: (context, index) => NewsCard(news[index]),
                 itemCount: news.length,
               ),

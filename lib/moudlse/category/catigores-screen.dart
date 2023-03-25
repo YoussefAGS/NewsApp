@@ -5,9 +5,7 @@ import 'package:news/moudlse/category/catgory-item.dart';
 class CategoriesScreen extends StatelessWidget {
   static const String routname="CategoriesScreen";
   Function selectedCategory;
-
   CategoriesScreen(this.selectedCategory);
-
   var category = CategoryData.getCategory();
 
   @override
